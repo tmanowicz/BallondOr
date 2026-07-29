@@ -32,9 +32,9 @@ jobs:
       - name: Configurer Pages
         id: pages
         uses: actions/configure-pages@v5
-        with:
-          # Active Pages automatiquement (source = GitHub Actions) si besoin.
-          enablement: true
+        # Prérequis (une seule fois) : Settings → Pages → Build and deployment
+        # → Source = "GitHub Actions". Le token du workflow ne peut pas
+        # activer Pages lui-même, d'où cette étape manuelle unique.
 
       - run: npm ci
 
