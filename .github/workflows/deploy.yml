@@ -1,0 +1,60 @@
+name: Déploiement GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - claude/ballon-dor-stats-site-66bspr
+  workflow_dispatch:
+
+# Permissions requises par le déploiement Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un seul déploiement à la fois.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Configurer Pages
+        id: pages
+        uses: actions/configure-pages@v5
+        with:
+          # Active Pages automatiquement (source = GitHub Actions) si besoin.
+          enablement: true
+
+      - run: npm ci
+
+      - name: Build (export statique)
+        run: npm run build
+        env:
+          # Préfixe /<repo> fourni par configure-pages (ex. /ballondor).
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Déployer sur Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
