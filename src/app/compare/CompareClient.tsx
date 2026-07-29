@@ -137,7 +137,7 @@ export default function CompareClient({
             </h2>
             <p className="mb-3 mt-0.5 text-xs text-white/40">
               {radarFotmob
-                ? "xG, xA, dribbles, pressing… par 90 min en championnat, normalisés sur 0-100 vs le vivier."
+                ? "xG, xA, dribbles, récupérations… par 90 min en championnat, normalisés sur 0-100 vs le vivier."
                 : "Chaque axe normalisé sur 0-100 par rapport au meilleur du vivier."}
             </p>
             <div className="mb-2 flex flex-wrap justify-center gap-x-5 gap-y-2">

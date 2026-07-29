@@ -81,25 +81,30 @@ introduit un nouveau type de libellé, ajoute-le à `classerEvenement()`.
 ## Le radar (type FIFA)
 
 Chaque joueur a un **radar** (fiche joueur + comparateur, jusqu'à 5 joueurs
-superposés). Faute de stats brutes FotMob dans `bareme_events.json`, les axes
-sont un **profil barème par 90 min** (Buts, Passes, Phase finale, Homme du
-match, Parcours, Trophées, Distinctions, Défense), chacun normalisé sur 0-100
-par rapport au meilleur du vivier. Logique dans `src/lib/radar.ts`.
+superposés), avec bascule automatique entre deux modes (`src/lib/radar.ts`) :
 
-### Brancher les vrais axes FotMob (xG, dribbles, pressing…)
+- **Mode FotMob** (actif) — dès que `src/data/radar_stats.json` contient des
+  joueurs. Axes réels par 90 min : `Buts · xG · xA · Occasions créées ·
+  Dribbles · Récupérations · Tacles+Int · Buts+Passes`.
+- **Mode barème** (secours) — sans ce fichier, profil par familles de points.
 
-Pour reproduire exactement un radar façon FIFA (xG/90, xA/90, occasions créées,
-dribbles, pressing haut, tacles+int), exporte ces stats depuis `fotmob.db` :
+Chaque axe est normalisé sur 0-100 par rapport au vivier (percentiles).
+
+### Régénérer les stats radar
 
 ```bash
 cd pipeline
-py export_radar.py --list-keys      # voir les stat_key réellement dispo
-py export_radar.py --champ 53       # ex. Ligue 1, par 90 min
-# → écrit src/data/radar_stats.json
+py export_radar.py --list-keys      # voir les stat_key dispo
+py export_radar.py                  # championnats domestiques, par 90 min
+# → écrit src/data/radar_stats.json ; le site le trim aux 60 du classement
 ```
 
-Une fois `radar_stats.json` en place, adapte les `AXES` de `src/lib/radar.ts`
-pour lire ce fichier (les clés d'axes sont déjà prévues côté script).
+**Note sur l'axe « Récupérations ».** Le radar de référence utilisait un
+« pressing haut = ballon gagné dans le dernier tiers ». Cette métrique zonée
+n'existe pas dans `fotmob.db` (ni dans `v_stat`, ni dans les JSON bruts —
+vérifié via `pipeline/probe_pressing.py`) : elle venait d'une autre source
+(FootyStats/FootyMetrics). L'axe utilise donc `recoveries` (récupérations
+totales) et est **honnêtement libellé « Récup. /90 »**, pas « pressing haut ».
 
 ## Pistes d'évolution
 

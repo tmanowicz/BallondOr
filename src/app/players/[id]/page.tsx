@@ -88,7 +88,7 @@ export default function PlayerPage({ params }: { params: { id: string } }) {
           </h2>
           <p className="mb-2 mt-0.5 text-xs text-white/40">
             {RADAR_FOTMOB
-              ? "xG, dribbles, pressing… par 90 min, normalisés sur 0-100 vs le vivier."
+              ? "xG, dribbles, récupérations… par 90 min, normalisés sur 0-100 vs le vivier."
               : "Chaque axe normalisé sur 0-100 vs le meilleur du vivier."}
           </p>
           <RadarFifa

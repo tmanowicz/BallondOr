@@ -42,7 +42,7 @@ const AXES_FIFA: AxeRadar[] = [
   { key: "xa", label: "xA /90" },
   { key: "occasions_creees", label: "OCCASIONS\nCRÉÉES" },
   { key: "dribbles", label: "DRIBBLES\n/90" },
-  { key: "pressing_haut", label: "PRESSING\nHAUT" },
+  { key: "pressing_haut", label: "RÉCUP.\n/90" },
   { key: "tacles_int", label: "TACLES\n+ INT." },
   { key: "buts_passes", label: "BUTS+PASSES\n/90" },
 ];
