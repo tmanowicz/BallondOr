@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #16263180, transparent),
+    #0B141A;
+  color: #E7EDF2;
+  min-height: 100vh;
+}
+
+.card {
+  @apply rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur;
+}
+
+.gold-text {
+  background: linear-gradient(180deg, #F1D98A, #C9A227);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
