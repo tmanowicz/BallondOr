@@ -78,6 +78,29 @@ titres, distinctions, hommes du match, meilleure défense, clean sheet…) sont
 déduites automatiquement du libellé dans `src/lib/events.ts`. Si le pipeline
 introduit un nouveau type de libellé, ajoute-le à `classerEvenement()`.
 
+## Le radar (type FIFA)
+
+Chaque joueur a un **radar** (fiche joueur + comparateur, jusqu'à 5 joueurs
+superposés). Faute de stats brutes FotMob dans `bareme_events.json`, les axes
+sont un **profil barème par 90 min** (Buts, Passes, Phase finale, Homme du
+match, Parcours, Trophées, Distinctions, Défense), chacun normalisé sur 0-100
+par rapport au meilleur du vivier. Logique dans `src/lib/radar.ts`.
+
+### Brancher les vrais axes FotMob (xG, dribbles, pressing…)
+
+Pour reproduire exactement un radar façon FIFA (xG/90, xA/90, occasions créées,
+dribbles, pressing haut, tacles+int), exporte ces stats depuis `fotmob.db` :
+
+```bash
+cd pipeline
+py export_radar.py --list-keys      # voir les stat_key réellement dispo
+py export_radar.py --champ 53       # ex. Ligue 1, par 90 min
+# → écrit src/data/radar_stats.json
+```
+
+Une fois `radar_stats.json` en place, adapte les `AXES` de `src/lib/radar.ts`
+pour lire ce fichier (les clés d'axes sont déjà prévues côté script).
+
 ## Pistes d'évolution
 
 - Graphe de relations entre joueurs (réseau clubs / coéquipiers / nationalités)

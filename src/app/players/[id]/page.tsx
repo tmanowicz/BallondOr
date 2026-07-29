@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import { getAllJoueurs, getJoueur, getProduction } from "@/lib/data";
 import CumulChart from "@/components/CumulChart";
 import RepartitionDonut from "@/components/RepartitionDonut";
+import RadarFifa from "@/components/RadarFifa";
 import { CATEGORIES } from "@/lib/events";
+import { AXES, getRadar } from "@/lib/radar";
 
 export function generateStaticParams() {
   return getAllJoueurs().map((j) => ({ id: String(j.id) }));
@@ -16,6 +18,8 @@ export default function PlayerPage({ params }: { params: { id: string } }) {
   if (!joueur) notFound();
 
   const prod = getProduction().get(joueur.id) ?? { buts: 0, passes: 0 };
+  const radar = getRadar([joueur.id])[0];
+  const axes = AXES.map((a) => ({ key: a.key, label: a.label }));
 
   // Courbe cumulée : somme des points au fil des dates.
   let cumul = 0;
@@ -68,13 +72,27 @@ export default function PlayerPage({ params }: { params: { id: string } }) {
         <StatTile value={marquants.length} label="Faits marquants" />
       </div>
 
-      {/* Courbe cumulée */}
-      <section className="card p-5">
-        <h2 className="mb-2 text-lg font-semibold">
-          Progression des points sur la saison
-        </h2>
-        <CumulChart series={serie} />
-      </section>
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {/* Courbe cumulée */}
+        <section className="card p-5">
+          <h2 className="mb-2 text-lg font-semibold">
+            Progression des points
+          </h2>
+          <CumulChart series={serie} height={360} />
+        </section>
+
+        {/* Radar profil barème */}
+        <section className="card p-5">
+          <h2 className="text-lg font-semibold">Radar — profil barème</h2>
+          <p className="mb-2 mt-0.5 text-xs text-white/40">
+            Chaque axe normalisé sur 0-100 vs le meilleur du vivier.
+          </p>
+          <RadarFifa
+            axes={axes}
+            series={[{ nom: joueur.nom, color: "#D4AF37", valeurs: radar.valeurs }]}
+          />
+        </section>
+      </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Répartition */}

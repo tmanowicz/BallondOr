@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import CumulChart, { type Serie } from "@/components/CumulChart";
+import RadarFifa, { type RadarAxe } from "@/components/RadarFifa";
 
 export interface JoueurCompare {
   id: number;
@@ -11,15 +12,18 @@ export interface JoueurCompare {
   rank: number;
   points: { date: string; value: number }[];
   repartition: { id: string; label: string; color: string; points: number }[];
+  radar: Record<string, number>;
 }
 
-const MAX = 4;
-const COULEURS = ["#D4AF37", "#4F9DE0", "#E0685A", "#5AC98A"];
+const MAX = 5;
+const COULEURS = ["#D4AF37", "#E7EDF2", "#E052A0", "#E0403A", "#F4A9C7"];
 
 export default function CompareClient({
   joueurs,
+  axes,
 }: {
   joueurs: JoueurCompare[];
+  axes: RadarAxe[];
 }) {
   const [selected, setSelected] = useState<number[]>(
     joueurs.slice(0, 2).map((j) => j.id),
@@ -106,7 +110,7 @@ export default function CompareClient({
       ) : (
         <>
           {/* Totaux */}
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
             {chosen.map((j) => (
               <div key={j.id} className="card p-4">
                 <div className="flex items-center gap-2">
@@ -123,6 +127,33 @@ export default function CompareClient({
               </div>
             ))}
           </div>
+
+          {/* Radar profil barème */}
+          <section className="card p-5">
+            <h2 className="text-lg font-semibold">Radar — profil barème</h2>
+            <p className="mb-3 mt-0.5 text-xs text-white/40">
+              Chaque axe normalisé sur 0-100 par rapport au meilleur du vivier.
+            </p>
+            <div className="mb-2 flex flex-wrap justify-center gap-x-5 gap-y-2">
+              {chosen.map((j) => (
+                <span key={j.id} className="flex items-center gap-2 text-xs font-bold tracking-wide">
+                  <span
+                    className="inline-block h-1 w-6 rounded"
+                    style={{ background: couleurDe(j.id) }}
+                  />
+                  {j.nom.toUpperCase()}
+                </span>
+              ))}
+            </div>
+            <RadarFifa
+              axes={axes}
+              series={chosen.map((j) => ({
+                nom: j.nom,
+                color: couleurDe(j.id),
+                valeurs: j.radar,
+              }))}
+            />
+          </section>
 
           {/* Courbes cumulées */}
           <section className="card p-5">

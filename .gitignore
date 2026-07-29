@@ -28,3 +28,6 @@ next-env.d.ts
 
 # base FotMob (non versionnée, trop grosse)
 pipeline/fotmob.db
+
+# captures de démo (non versionnées)
+scratch-shots/
