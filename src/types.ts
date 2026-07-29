@@ -46,7 +46,8 @@ export type CategorieId =
   | "defense"
   | "clean_sheet"
   | "titre_stat"
-  | "distinction";
+  | "distinction"
+  | "malus";
 
 export interface Categorie {
   id: CategorieId;

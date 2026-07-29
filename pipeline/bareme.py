@@ -243,6 +243,16 @@ STATUT_REMPLACANT = 0.5           # utilise seulement si STATUT_MODE == "forfait
 # les autres competitions, c'est l'ensemble des matchs de l'equipe.
 REMPLACANT_TOUTES_COMPETITIONS = True
 
+# --- MALUS DE MAUVAISE SAISON EN CLUB -----------------------------------
+# Un joueur dont le club termine au-dela de ce rang dans son championnat se
+# voit retirer un forfait sur son total. Le Ballon d'Or recompense une
+# saison entiere : une saison de club ratee en fait partie.
+# Forfait plutot que coefficient : le joueur recule sans etre efface, et le
+# malus apparait comme une ligne a part, visible dans explique.py.
+#   MALUS_POINTS = 0  -> desactive
+MALUS_POINTS = 50
+MALUS_RANG_CLUB = 15
+
 # Deux garde-fous, sans lesquels le seuil a 50 % produit des aberrations.
 #
 # 1. ECHANTILLON MINIMAL. Sur une competition ou l'equipe n'a joue que deux
@@ -268,6 +278,13 @@ POIDS_ENTREE = 0.5
 #    preserver pour ces rendez-vous : le penaliser serait un contresens.
 #    Mettre () pour desactiver.
 COMPETITIONS_REFERENCE = (LDC, CDM)
+
+# 4. DEMI-FINALE + FINALE = TITULAIRE. Un joueur aligne d'entree sur les deux
+#    matchs decisifs d'une competition est considere titulaire de la campagne,
+#    meme s'il a manque la majorite des tours precedents. Exiger les DEUX
+#    matchs, et pas seulement la finale, evite qu'une seule titularisation
+#    sur sept ne suffise.
+TITULAIRE_SI_DEMI_ET_FINALE = True
 
 # --- Cas Messi : production et recompenses MLS saisies a la main ---------
 # La MLS n'est pas dans fotmob.db : seule la Coupe du monde de Messi y
@@ -445,6 +462,29 @@ def main() -> None:
             for tid_, in conn.execute(
                     "SELECT DISTINCT team_id FROM appearance WHERE match_id = ?", (mid,)):
                 matchs_ko_equipe[(m["parent"], tid_)].add(mid)
+    # --- Exception « demi-finale + finale » ------------------------------
+    # Un joueur titularise A LA FOIS en demi-finale et en finale est considere
+    # titulaire de la campagne, quel que soit son ratio sur l'ensemble des
+    # tours. L'idee : etre aligne sur les deux matchs decisifs vaut statut de
+    # cadre. Demarrer la seule finale ne suffit pas — sinon un joueur present
+    # sur 1 match couperet sur 7 obtiendrait le plein tarif.
+    titulaire_finale = set()
+    if TITULAIRE_SI_DEMI_ET_FINALE:
+        for parent in (LDC, CDM):
+            demi, fina = set(), set()
+            for mid, m in matchs.items():
+                if m["parent"] != parent:
+                    continue
+                if m["phase"] not in ("Demi-finales", "Finale"):
+                    continue
+                cible = demi if m["phase"] == "Demi-finales" else fina
+                for pid_, in conn.execute(
+                        "SELECT player_id FROM appearance "
+                        "WHERE match_id = ? AND position_id IS NOT NULL", (mid,)):
+                    cible.add(pid_)
+            for pid_ in demi & fina:
+                titulaire_finale.add((pid_, parent))
+
     for pid_, mid, val in conn.execute(
             "SELECT player_id, match_id, value FROM v_stat "
             "WHERE stat_key = 'minutes_played' AND value > 0"):
@@ -487,6 +527,8 @@ def main() -> None:
         total, n_titu, n_joue, _ = d
         if total == 0:
             return True
+        if (pid, parent) in titulaire_finale:
+            return True                       # titularise en demi ET en finale
         if parent not in (LDC, CDM) and total < MIN_MATCHS_STATUT:
             return True                       # echantillon trop faible
         poids = (n_titu if parent in (LDC, CDM)
@@ -513,6 +555,8 @@ def main() -> None:
         total, n_titu, n_joue, minutes = d
         if total == 0:
             return 1.0
+        if (pid, parent) in titulaire_finale:
+            return 1.0                        # titularise en demi ET en finale
         # L'echantillon minimal ne vaut QUE pour les competitions ajoutees
         # par l'extension. En LDC et en CdM la section 9 impose la regle
         # explicitement : une phase finale de Coupe du monde ne compte que
@@ -533,6 +577,45 @@ def main() -> None:
         # Alias pour les points collectifs (parcours/champion/coupe) : meme
         # coefficient que la production, derive de l'equipe du joueur.
         return reduc(pid, parent)
+
+    # ------------------------------------------- malus de saison en club
+    # Rang final de chaque equipe dans son championnat, pour le malus.
+    rang_club = {}
+    if MALUS_POINTS:
+        pts_ch = defaultdict(lambda: defaultdict(int))
+        for mid, m in matchs.items():
+            if m["parent"] not in CHAMPIONNATS or m["phase"] != "Phase reguliere":
+                continue
+            row = conn.execute("""SELECT home_team_id, away_team_id,
+                                         home_score, away_score
+                                  FROM match WHERE match_id = ?""", (mid,)).fetchone()
+            if not row:
+                continue
+            h, a, hs, aws = row
+            if hs is None or aws is None:
+                continue
+            if hs > aws:   pts_ch[m["parent"]][h] += 3
+            elif aws > hs: pts_ch[m["parent"]][a] += 3
+            else:          pts_ch[m["parent"]][h] += 1; pts_ch[m["parent"]][a] += 1
+        for parent, tab in pts_ch.items():
+            for i, tid in enumerate(sorted(tab, key=lambda t: -tab[t]), 1):
+                rang_club[tid] = i
+
+    # Club principal de chaque joueur, hors selection. Doit etre connu AVANT
+    # la boucle de production, sinon le malus ne s'applique pas aux buts et
+    # aux passes : la table `equipes` n'est remplie qu'ensuite.
+    club_principal = {}
+    if MALUS_POINTS:
+        freq = defaultdict(lambda: defaultdict(int))
+        for mid, m in matchs.items():
+            if m["parent"] == CDM:
+                continue
+            for pid_, tid_ in conn.execute(
+                    "SELECT player_id, team_id FROM appearance WHERE match_id = ?",
+                    (mid,)):
+                freq[pid_][tid_] += 1
+        for pid_, cpt in freq.items():
+            club_principal[pid_] = max(cpt, key=cpt.get)
 
     # ---------------------------------------------------------- production
     print("Production, sur le vivier complet...")
@@ -913,21 +996,43 @@ def main() -> None:
     manuels = set()
     if MANUEL.exists() and "--sans-manuel" not in sys.argv:
         data = json.loads(MANUEL.read_text(encoding="utf-8"))
-        exact = {normaliser(n): pid for pid, n in noms.items()}
+        # ATTENTION AUX HOMONYMES. Un dictionnaire nom -> identifiant ecrase
+        # silencieusement le premier joueur quand deux portent le meme nom
+        # (deux Vitinha, plusieurs Marquinhos...) et les points partent alors
+        # au mauvais joueur, sans le moindre message. On garde donc TOUS les
+        # candidats et on tranche au temps de jeu : le joueur le plus utilise
+        # est celui que designe le fichier manuel.
+        exact = defaultdict(list)
+        for pid, n in noms.items():
+            exact[normaliser(n)].append(pid)
         famille = defaultdict(list)
         for pid, n in noms.items():
             toks = normaliser(n).split()
             if toks:
                 famille[toks[-1]].append(pid)
 
+        def trancher(cands, libelle):
+            """Choisit le joueur le plus utilise et signale l'ambiguite."""
+            if len(cands) == 1:
+                return cands[0]
+            best = max(cands, key=lambda p: minutes.get(p, 0))
+            details = ", ".join(f"{noms[p]} ({clubs.get(p) or '?'}, "
+                                f"{minutes.get(p, 0):.0f} min)" for p in cands)
+            print(f"  [homonymes] {libelle} : {details} -> retenu {noms[best]}")
+            return best
+
         introuvables = []
         for ev in data.get("evenements", []):
             cible = normaliser(ev.get("joueur", ""))
-            pid = ev.get("player_id") or exact.get(cible)
+            pid = ev.get("player_id")
+            if pid is None:
+                cands = exact.get(cible, [])
+                if cands:
+                    pid = trancher(cands, ev.get("joueur", ""))
             if pid is None:                       # repli sur le nom de famille
                 cands = famille.get(cible.split()[-1] if cible else "", [])
-                if len(cands) == 1:
-                    pid = cands[0]
+                if cands:
+                    pid = trancher(cands, ev.get("joueur", ""))
                     print(f"  rapproche : {ev['joueur']} -> {noms[pid]}")
             if pid is None:
                 introuvables.append(ev.get("joueur"))
@@ -980,6 +1085,35 @@ def main() -> None:
     else:
         print(f"  [!] Messi (id {MESSI_ID}) absent du vivier : "
               f"production MLS non ajoutee (verifie l'id).")
+
+    # ------------------------------------------- malus de saison en club
+    if MALUS_POINTS:
+        NOM_CH = {}
+        for parent in CHAMPIONNATS:
+            r = conn.execute("SELECT competition FROM v_match "
+                             "WHERE parent_league_id = ? LIMIT 1", (parent,)).fetchone()
+            if r:
+                NOM_CH[parent] = r[0]
+        # a quel championnat appartient chaque equipe classee
+        ch_de = {}
+        for mid, m in matchs.items():
+            if m["parent"] not in CHAMPIONNATS:
+                continue
+            for tid_, in conn.execute(
+                    "SELECT DISTINCT team_id FROM appearance WHERE match_id = ?", (mid,)):
+                ch_de[tid_] = m["parent"]
+        n_mal = 0
+        for pid_ in list(noms):
+            tid = club_principal.get(pid_)
+            r = rang_club.get(tid)
+            if not r or r <= MALUS_RANG_CLUB:
+                continue
+            comp = NOM_CH.get(ch_de.get(tid), "son championnat")
+            evenements.append(("2026-05-31", pid_, -float(MALUS_POINTS),
+                               f"malus saison en club ({r}e de {comp})"))
+            n_mal += 1
+        print(f"Malus de saison en club : {n_mal} joueur(s) au-dela de la "
+              f"{MALUS_RANG_CLUB}e place, -{MALUS_POINTS} pts")
 
     # -------------------------------------------------------------- vivier
     if BONUS_UNE_FOIS_PAR_MATCH:

@@ -122,7 +122,13 @@ export default function PlayerPage({ params }: { params: { id: string } }) {
                     {r.categorie.label}
                     <span className="text-white/30">×{r.count}</span>
                   </span>
-                  <span className="font-medium text-white">{r.points}</span>
+                  <span
+                    className={`font-medium ${
+                      r.points < 0 ? "text-red-400" : "text-white"
+                    }`}
+                  >
+                    {r.points}
+                  </span>
                 </div>
               ))}
           </div>
@@ -156,8 +162,12 @@ export default function PlayerPage({ params }: { params: { id: string } }) {
                 </div>
                 <div className="flex shrink-0 items-center gap-3">
                   <span className="text-xs text-white/40">{e.date}</span>
-                  <span className="w-10 text-right font-medium text-gold">
-                    +{e.points}
+                  <span
+                    className={`w-10 text-right font-medium ${
+                      e.points < 0 ? "text-red-400" : "text-gold"
+                    }`}
+                  >
+                    {e.points < 0 ? e.points : `+${e.points}`}
                   </span>
                 </div>
               </div>

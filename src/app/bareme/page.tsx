@@ -134,12 +134,29 @@ export default function BaremePage() {
             <span className="font-medium text-white">Remplaçants en phase finale de LDC / CdM</span> :
             titulaire si &gt; 50 % des matchs de phase finale démarrés, sinon{" "}
             <b className="text-gold">demi-tarif</b> sur les points de cette
-            compétition.
+            compétition. Un joueur titularisé <b className="text-gold">en demi ET
+            en finale</b> est toujours considéré titulaire de la campagne.
           </p>
           <p>
             Tout le reste est à taux plein (coupes nationales des grands pays,
             Europa, Conference, Ligue des nations). Coupe du monde des clubs :
             exclue.
+          </p>
+        </div>
+      </Section>
+
+      {/* Malus */}
+      <Section titre="10. Malus de saison en club">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="flex items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/5 px-3 py-2">
+            <span className="text-lg font-bold text-red-400">−50</span>
+            <span className="text-sm text-white/60">points</span>
+          </div>
+          <p className="text-sm text-white/70">
+            Retirés au total d&apos;un joueur dont le club termine{" "}
+            <b className="text-red-400">au-delà de la 15ᵉ place</b> de son
+            championnat. Le Ballon d&apos;Or récompense une saison entière : une
+            saison de club ratée en fait partie.
           </p>
         </div>
       </Section>

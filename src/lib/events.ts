@@ -15,6 +15,7 @@ export function classerEvenement(libelle: string): CategorieId {
   if (/meilleure defense/.test(l)) return "defense";
   if (/clean sheet/.test(l)) return "clean_sheet";
   if (/meilleur buteur|meilleur passeur/.test(l)) return "titre_stat";
+  if (/^malus/.test(l)) return "malus";
   // MVP, équipe-type, meilleur joueur du championnat, distinctions MLS…
   return "distinction";
 }
@@ -34,6 +35,7 @@ export const CATEGORIES: Record<CategorieId, Categorie> = {
   titre_stat: { id: "titre_stat", label: "Titre buteur / passeur", color: "#3FA36B" },
   defense: { id: "defense", label: "Meilleure défense", color: "#4FB5C9" },
   clean_sheet: { id: "clean_sheet", label: "Clean sheet", color: "#3C8C99" },
+  malus: { id: "malus", label: "Malus saison en club", color: "#9AA3AD" },
 };
 
 // Ordre d'affichage stable des catégories (production → trophées → défense).
@@ -50,6 +52,7 @@ export const ORDRE_CATEGORIES: CategorieId[] = [
   "titre_stat",
   "defense",
   "clean_sheet",
+  "malus",
 ];
 
 export function categorie(id: CategorieId): Categorie {
