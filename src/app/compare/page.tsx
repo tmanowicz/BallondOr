@@ -3,7 +3,7 @@ import {
   getRanking,
   getRepartition,
 } from "@/lib/data";
-import { AXES, getRadar } from "@/lib/radar";
+import { AXES, RADAR_FOTMOB, getRadar } from "@/lib/radar";
 import CompareClient, { type JoueurCompare } from "./CompareClient";
 
 export default function ComparePage() {
@@ -56,7 +56,7 @@ export default function ComparePage() {
           progression et la composition de leurs points.
         </p>
       </div>
-      <CompareClient joueurs={joueurs} axes={axes} />
+      <CompareClient joueurs={joueurs} axes={axes} radarFotmob={RADAR_FOTMOB} />
     </div>
   );
 }

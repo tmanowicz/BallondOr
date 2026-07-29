@@ -21,9 +21,11 @@ const COULEURS = ["#D4AF37", "#E7EDF2", "#E052A0", "#E0403A", "#F4A9C7"];
 export default function CompareClient({
   joueurs,
   axes,
+  radarFotmob,
 }: {
   joueurs: JoueurCompare[];
   axes: RadarAxe[];
+  radarFotmob: boolean;
 }) {
   const [selected, setSelected] = useState<number[]>(
     joueurs.slice(0, 2).map((j) => j.id),
@@ -128,11 +130,15 @@ export default function CompareClient({
             ))}
           </div>
 
-          {/* Radar profil barème */}
+          {/* Radar */}
           <section className="card p-5">
-            <h2 className="text-lg font-semibold">Radar — profil barème</h2>
+            <h2 className="text-lg font-semibold">
+              {radarFotmob ? "Radar — stats FotMob /90" : "Radar — profil barème"}
+            </h2>
             <p className="mb-3 mt-0.5 text-xs text-white/40">
-              Chaque axe normalisé sur 0-100 par rapport au meilleur du vivier.
+              {radarFotmob
+                ? "xG, xA, dribbles, pressing… par 90 min en championnat, normalisés sur 0-100 vs le vivier."
+                : "Chaque axe normalisé sur 0-100 par rapport au meilleur du vivier."}
             </p>
             <div className="mb-2 flex flex-wrap justify-center gap-x-5 gap-y-2">
               {chosen.map((j) => (

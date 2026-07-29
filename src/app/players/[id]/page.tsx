@@ -5,7 +5,7 @@ import CumulChart from "@/components/CumulChart";
 import RepartitionDonut from "@/components/RepartitionDonut";
 import RadarFifa from "@/components/RadarFifa";
 import { CATEGORIES } from "@/lib/events";
-import { AXES, getRadar } from "@/lib/radar";
+import { AXES, RADAR_FOTMOB, getRadar } from "@/lib/radar";
 
 export function generateStaticParams() {
   return getAllJoueurs().map((j) => ({ id: String(j.id) }));
@@ -83,9 +83,13 @@ export default function PlayerPage({ params }: { params: { id: string } }) {
 
         {/* Radar profil barème */}
         <section className="card p-5">
-          <h2 className="text-lg font-semibold">Radar — profil barème</h2>
+          <h2 className="text-lg font-semibold">
+            {RADAR_FOTMOB ? "Radar — stats FotMob /90" : "Radar — profil barème"}
+          </h2>
           <p className="mb-2 mt-0.5 text-xs text-white/40">
-            Chaque axe normalisé sur 0-100 vs le meilleur du vivier.
+            {RADAR_FOTMOB
+              ? "xG, dribbles, pressing… par 90 min, normalisés sur 0-100 vs le vivier."
+              : "Chaque axe normalisé sur 0-100 vs le meilleur du vivier."}
           </p>
           <RadarFifa
             axes={axes}
