@@ -1,5 +1,7 @@
 # 🏆 Ballon d'Or — Stats avancées (saison 2025/2026)
 
+**🌐 Site en ligne : https://tmanowicz.github.io/BallondOr/**
+
 Site web qui affiche le classement Ballon d'Or calculé par le barème 2026 :
 classement des 60 meilleurs joueurs, fiches détaillées avec progression des
 points sur la saison, répartition par catégorie, timeline des faits marquants,
