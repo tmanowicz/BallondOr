@@ -1,0 +1,160 @@
+================================================================================
+BAREME BALLON D'OR 2026 — saison 2025/2026
+Version consolidee, toutes revisions integrees
+================================================================================
+
+
+1. PRODUCTION
+--------------------------------------------------------------------------------
+1 point par but
+0,75 point par passe decisive
+Toutes competitions confondues.
+
+
+2. PARCOURS EN COUPE
+--------------------------------------------------------------------------------
+                              Ligue des champions    Coupe du monde          Europa Ligue          Conference ligue
+   Vainqueur                          40                   50			  30			20
+   Finaliste                          20                   25			  15			10 
+   Demi-finaliste                     10                   13			   8			 5
+   Quart de finaliste                  5                    7	                   4			 3
+
+Attribue a tout joueur ayant dispute la competition avec le club ou la
+selection concernee.
+
+
+3. TROPHEES DOMESTIQUES
+--------------------------------------------------------------------------------
+   Championnat                        25
+   Coupe nationale                    10
+   Supercoupe / Trophee des champions  5
+
+4. Defense EN PHASE FINALE
+--------------------------------------------------------------------------------
+Si l'equipe fait un clean sheet les titulaires en defense et gardien de but prennent les points suivants
+
+   Tour                          LDC          CdM         Europa League		Conference league
+   Seiziemes (barrages en LDC)     1            2		1			1
+   Huitiemes                       2            3		2			1
+   Quarts                          4            5		3			2
+   Demi-finales                    8           10		5			3
+   Match pour la 3e place          —            5					
+   Finale                         15           20		10			5
+
+4. BUTS EN PHASE FINALE
+--------------------------------------------------------------------------------
+
+
+   Tour                          LDC          CdM         Europa League		Conference league
+   Seiziemes (barrages en LDC)     2            3		1			1
+   Huitiemes                       4            5		2			1
+   Quarts                          7            9		3			2
+   Demi-finales                   13           18		5			3
+   Match pour la 3e place          —           10 					
+   Finale                         25           35		10			5
+
+
+5. PASSES DECISIVES EN PHASE FINALE
+--------------------------------------------------------------------------------
+
+
+   Tour                          LDC          CdM         Europa League		Conference league
+   Seiziemes (barrages en LDC)     2            2		1			1
+   Huitiemes                       3            4		1			1
+   Quarts                          5            8		2			2
+   Demi-finales                   10           15		4			3
+   Match pour la 3e place          —            5 					
+   Finale                         20           30		8			5
+
+6. HOMMES DU MATCH
+--------------------------------------------------------------------------------
+   Tour                          LDC          CdM         Europa League		Conference league
+   Seiziemes (barrages en LDC)     2            3		1			1
+   Huitiemes                       4            5		2			1
+   Quarts                          8           10		3			2
+   Demi-finales                   15           20		5			3
+   Match pour la 3e place          —           10 		-			-
+   Finale                         30           40		10		        5
+
+
+7. DISTINCTIONS INDIVIDUELLES
+--------------------------------------------------------------------------------
+   MVP de la Coupe du monde           100
+   MVP de la Ligue des champions       75
+   Equipe-type de la Coupe du monde    50
+   Equipe-type de la Ligue des champions 35
+   Meilleur joueur du championnat      15
+   MVP de l'Europa league      	       15
+   Equipe-type de l'Europa league      10
+   MVP de la conference league         8
+   Equipe-type de la conference league	4
+   Equipe-type des 5 grands championnats 10
+
+L'equipe-type de la Coupe du monde retenue est le onze FIFA vote par le
+public.
+
+
+8. TITRES DE BUTEUR, DE PASSEUR et Defense
+--------------------------------------------------------------------------------
+   
+   				   Buteurs	    Passeurs		Defense
+   Championnat                        10		8		   6
+   Ligue des champions                20	       16		  12
+   Coupe du monde                     30               24		  18
+
+Les points du dessus sont attribués à la defense et gardien titulaire de la meilleure defense statistiquement de la competition
+
+
+9. COEFFICIENTS
+--------------------------------------------------------------------------------
+Regime reduit pour les championnats hors des cinq grands (Angleterre,
+Espagne, Allemagne, Italie, France) :
+
+   Production et distinctions          1/4
+   Coupe nationale associee            1/2
+
+Concerne la Liga Portugal, l'Eredivisie, la Super Lig, la Taca de
+Portugal, la Coupe de Belgique — et la MLS.
+
+Cas Messi : production et recompenses en MLS au quart, MLS Cup a la
+moitie. Sa production en selection argentine compte a taux plein.
+
+TOUT LE RESTE EST A TAUX PLEIN, y compris les coupes nationales des
+grands pays, la Ligue Europa, la Ligue Conference et la Ligue des
+nations.
+
+Coupe du monde des clubs FIFA : exclue du bareme.
+
+Regime Reduit pour les joueurs au statut de remplacants en phase finale de CDM et LDC
+Joueur est considéré titulaire s'il est titulaire dans >50% des matchs de phases finales de CDM, LDC sur tous les matchs joués de son équipe
+Sinon il prend 1/2 sur les points générés dans cette competition.
+
+
+10. DECISIONS PARTICULIERES
+--------------------------------------------------------------------------------
+Finales gagnees aux tirs au but, non lisibles dans les donnees de match :
+
+   Ligue des champions          Paris Saint-Germain
+   Copa del Rey                 Real Sociedad
+   Trophee des champions        Paris Saint-Germain
+
+
+11. POINTS ENCORE OUVERTS
+--------------------------------------------------------------------------------
+   - Meilleur joueur de Serie A 2025/26          (15 pts, non trouve)
+   - Meilleur joueur de Bundesliga 2025/26       (15 pts, non trouve)
+   - MVP de la finale de Coupe du monde          (20 pts, non trouve)
+   - Devaluation eventuelle de la Ligue des nations et de la Ligue
+     Conference, evoquee mais non tranchee
+
+
+================================================================================
+NOTE DE METHODE
+--------------------------------------------------------------------------------
+Production, parcours, titres de champion et de coupe, titres de meilleur
+buteur et passeur des championnats : calcules automatiquement sur 3 963
+matchs de la saison, extraits de FotMob.
+
+Distinctions individuelles, hommes du match, faits marquants : saisis a
+la main dans bareme_manuel.json, sources UEFA et FIFA.
+================================================================================

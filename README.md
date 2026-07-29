@@ -1,8 +1,9 @@
-# 🏆 Ballon d'Or — Stats avancées
+# 🏆 Ballon d'Or — Stats avancées (saison 2025/2026)
 
-Site web de statistiques avancées pour le Ballon d'Or : classement calculé
-selon un barème paramétrable, fiches joueurs détaillées, comparateur avec
-graphiques (radars, barres).
+Site web qui affiche le classement Ballon d'Or calculé par le barème 2026 :
+classement des 60 meilleurs joueurs, fiches détaillées avec progression des
+points sur la saison, répartition par catégorie, timeline des faits marquants,
+comparateur, et documentation du barème.
 
 Construit avec **Next.js 14** (App Router), **TypeScript**, **Tailwind CSS**
 et **Recharts**.
@@ -12,82 +13,74 @@ et **Recharts**.
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # build de production
+npm run build    # build de production (60 fiches générées en statique)
 ```
 
-## Structure
+## Architecture
 
 ```
+pipeline/                     # LE MOTEUR (Python) — hors du site
+├── bareme.py                 # calcule les points depuis fotmob.db
+├── bareme_ballondor_2026.txt # spécification du barème
+└── bareme_manuel.json        # distinctions saisies à la main (UEFA/FIFA)
+
 src/
-├── app/
-│   ├── page.tsx                 # Classement (podium + tableau)
-│   ├── players/[id]/page.tsx    # Fiche joueur (stats, radar, détail du score)
-│   └── compare/                 # Comparateur interactif
-├── components/
-│   ├── RadarStats.tsx           # Graphique radar
-│   └── CompareBars.tsx          # Graphiques en barres
 ├── data/
-│   └── players.json             # 👉 TES DONNÉES (voir ci-dessous)
+│   └── bareme_events.json    # 👉 SORTIE du pipeline, consommée par le site
+├── app/
+│   ├── page.tsx              # Classement (podium + tableau)
+│   ├── players/[id]/         # Fiche joueur (courbe cumulée, donut, faits marquants)
+│   ├── compare/              # Comparateur (progression + points par catégorie)
+│   └── bareme/               # Documentation du barème 2026
+├── components/
+│   ├── CumulChart.tsx        # Courbe des points cumulés
+│   └── RepartitionDonut.tsx  # Répartition par catégorie
 ├── lib/
-│   ├── data.ts                  # Accès aux données
-│   └── scoring.ts               # 👉 TON BARÈME (voir ci-dessous)
-└── types.ts                     # Modèle de données
+│   ├── data.ts               # Lecture / agrégation des événements
+│   └── events.ts             # Catégorisation des libellés (12 familles)
+└── types.ts
 ```
 
-## 1. Brancher tes données
+## Le flux de données
 
-Remplace `src/data/players.json` par tes vraies données. Chaque joueur suit
-ce format (voir `src/types.ts`) :
+1. Le **pipeline Python** (`pipeline/bareme.py`) lit la base FotMob
+   (`fotmob.db`, non versionnée) et le fichier manuel, applique le barème, et
+   écrit `bareme_events.json`.
+2. Le **site** lit ce JSON. Format :
 
-```json
+```jsonc
 {
-  "id": "identifiant-unique",
-  "name": "Nom du joueur",
-  "club": "Club",
-  "nationality": "Nationalité",
-  "position": "Poste",
-  "age": 25,
-  "season": "2023-24",
-  "stats": {
-    "appearances": 40, "goals": 25, "assists": 12, "minutes": 3500,
-    "xG": 20.1, "xA": 9.4, "keyPasses": 80, "shots": 110,
-    "dribblesCompleted": 60, "passAccuracy": 82.5,
-    "tackles": 30, "interceptions": 12, "rating": 7.8
-  },
-  "trophies": [
-    { "name": "Champions League", "scope": "international" },
-    { "name": "Ligue 1", "scope": "club" }
+  "saison": "2025/2026",
+  "joueurs": [
+    { "id": 692984, "nom": "Ousmane Dembélé", "club": "Paris Saint-Germain",
+      "team_id": 9847, "minutes": 2663, "total": 314 }
+  ],
+  "evenements": [
+    ["2026-05-30", 692984, 30.0, "homme du match LDC finale"]
+    // [date, id joueur, points, libellé]
   ]
 }
 ```
 
-Si tes données ont un format différent (autres colonnes, CSV, dump SQL...),
-donne-moi un échantillon et j'écris le script de conversion.
+### Mettre à jour les données
 
-## 2. Régler ton barème
+Régénère `bareme_events.json` avec le pipeline, puis remplace le fichier dans
+`src/data/` — aucun changement de code nécessaire tant que le format est
+respecté :
 
-Tout le calcul des points est dans `src/lib/scoring.ts`, dans l'objet
-`DEFAULT_WEIGHTS`. Modifie les poids pour coller à ton barème :
-
-```ts
-export const DEFAULT_WEIGHTS: ScoringWeights = {
-  perGoal: 2.5,          // points par but
-  perAssist: 1.5,        // points par passe décisive
-  perKeyPass: 0.1,
-  perDribble: 0.15,
-  perRatingPointAbove6: 8,
-  perExpectedContribution: 0.4,   // par (xG + xA)
-  trophyPoints: { club: 6, international: 20, individual: 4 },
-  namedTrophyBonus: { "champions league": 15, "world cup": 30, ... },
-};
+```bash
+cd pipeline && py bareme.py --pool 60
+cp bareme_events.json ../src/data/bareme_events.json
 ```
 
-Si ton barème repose sur des règles plus complexes (paliers, multiplicateurs
-par poste, votes...), colle-le-moi et je réécris la fonction `computeScore`.
+Les 12 catégories d'événements (buts, passes, bonus de phase finale, parcours,
+titres, distinctions, hommes du match, meilleure défense, clean sheet…) sont
+déduites automatiquement du libellé dans `src/lib/events.ts`. Si le pipeline
+introduit un nouveau type de libellé, ajoute-le à `classerEvenement()`.
 
-## Prochaines étapes possibles
+## Pistes d'évolution
 
 - Graphe de relations entre joueurs (réseau clubs / coéquipiers / nationalités)
-- Filtres par saison, poste, championnat
-- Historique multi-saisons par joueur
-- Import automatique depuis une API de stats
+- Filtres par club, compétition, période
+- Comparaison multi-saisons
+- Détail match par match d'un événement (lien vers la source FotMob)

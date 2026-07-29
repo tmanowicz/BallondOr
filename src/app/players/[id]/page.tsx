@@ -1,31 +1,36 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllPlayers, getRankedPlayer } from "@/lib/data";
-import RadarStats from "@/components/RadarStats";
+import { getAllJoueurs, getJoueur, getProduction } from "@/lib/data";
+import CumulChart from "@/components/CumulChart";
+import RepartitionDonut from "@/components/RepartitionDonut";
+import { CATEGORIES } from "@/lib/events";
 
 export function generateStaticParams() {
-  return getAllPlayers().map((p) => ({ id: p.id }));
+  return getAllJoueurs().map((j) => ({ id: String(j.id) }));
 }
 
-export default function PlayerPage({ params }: { params: { id: string } }) {
-  const player = getRankedPlayer(params.id);
-  if (!player) notFound();
+const PRODUCTION = new Set(["but", "passe"]);
 
-  const s = player.stats;
-  const statTiles: { label: string; value: string | number }[] = [
-    { label: "Matchs", value: s.appearances },
-    { label: "Buts", value: s.goals },
-    { label: "Passes déc.", value: s.assists },
-    { label: "Minutes", value: s.minutes },
-    { label: "xG", value: s.xG.toFixed(1) },
-    { label: "xA", value: s.xA.toFixed(1) },
-    { label: "Passes clés", value: s.keyPasses },
-    { label: "Dribbles", value: s.dribblesCompleted },
-    { label: "Précision passes", value: `${s.passAccuracy}%` },
-    { label: "Tacles", value: s.tackles },
-    { label: "Interceptions", value: s.interceptions },
-    { label: "Note moyenne", value: s.rating.toFixed(2) },
+export default function PlayerPage({ params }: { params: { id: string } }) {
+  const joueur = getJoueur(Number(params.id));
+  if (!joueur) notFound();
+
+  const prod = getProduction().get(joueur.id) ?? { buts: 0, passes: 0 };
+
+  // Courbe cumulée : somme des points au fil des dates.
+  let cumul = 0;
+  const serie = [
+    { name: joueur.nom, color: "#D4AF37", points: [] as { date: string; value: number }[] },
   ];
+  for (const e of joueur.evenements) {
+    cumul = Math.round((cumul + e.points) * 100) / 100;
+    serie[0].points.push({ date: e.date, value: cumul });
+  }
+
+  // Faits marquants : tout sauf la production courante (buts/passes de base).
+  const marquants = joueur.evenements
+    .filter((e) => !PRODUCTION.has(e.categorie))
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
 
   return (
     <div className="space-y-8">
@@ -38,95 +43,117 @@ export default function PlayerPage({ params }: { params: { id: string } }) {
         <div>
           <div className="flex items-center gap-3">
             <span className="rounded-lg bg-gold/10 px-2.5 py-1 text-sm font-bold text-gold">
-              #{player.rank}
+              #{joueur.rank}
             </span>
-            <h1 className="text-2xl font-bold sm:text-3xl">{player.name}</h1>
+            <h1 className="text-2xl font-bold sm:text-3xl">{joueur.nom}</h1>
           </div>
           <p className="mt-1 text-white/60">
-            {player.position} · {player.club} · {player.nationality} ·{" "}
-            {player.age} ans
+            {joueur.club ?? "Sélection nationale"} ·{" "}
+            {joueur.minutes.toLocaleString("fr-FR")} minutes jouées
           </p>
         </div>
         <div className="text-right">
-          <div className="gold-text text-4xl font-bold">
-            {player.score.total}
-          </div>
+          <div className="gold-text text-4xl font-bold">{joueur.total}</div>
           <div className="text-xs uppercase tracking-wide text-white/40">
             points barème
           </div>
         </div>
       </div>
 
-      {/* Tuiles de stats */}
-      <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
-        {statTiles.map((t) => (
-          <div key={t.label} className="card p-3 text-center">
-            <div className="text-xl font-semibold text-white">{t.value}</div>
-            <div className="mt-1 text-[11px] uppercase tracking-wide text-white/40">
-              {t.label}
-            </div>
-          </div>
-        ))}
+      {/* Tuiles clés */}
+      <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
+        <StatTile value={prod.buts} label="Buts" />
+        <StatTile value={prod.passes} label="Passes déc." />
+        <StatTile value={joueur.evenements.length} label="Événements" />
+        <StatTile value={marquants.length} label="Faits marquants" />
       </div>
+
+      {/* Courbe cumulée */}
+      <section className="card p-5">
+        <h2 className="mb-2 text-lg font-semibold">
+          Progression des points sur la saison
+        </h2>
+        <CumulChart series={serie} />
+      </section>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {/* Radar */}
+        {/* Répartition */}
         <section className="card p-5">
-          <h2 className="mb-2 text-lg font-semibold">Profil statistique</h2>
-          <RadarStats players={[player]} />
+          <h2 className="mb-4 text-lg font-semibold">
+            Répartition des points
+          </h2>
+          <RepartitionDonut repartition={joueur.repartition} />
+          <div className="mt-4 space-y-1.5">
+            {joueur.repartition
+              .slice()
+              .sort((a, b) => b.points - a.points)
+              .map((r) => (
+                <div
+                  key={r.categorie.id}
+                  className="flex items-center justify-between text-sm"
+                >
+                  <span className="flex items-center gap-2 text-white/70">
+                    <span
+                      className="inline-block h-2.5 w-2.5 rounded-full"
+                      style={{ background: r.categorie.color }}
+                    />
+                    {r.categorie.label}
+                    <span className="text-white/30">×{r.count}</span>
+                  </span>
+                  <span className="font-medium text-white">{r.points}</span>
+                </div>
+              ))}
+          </div>
         </section>
 
-        {/* Détail du score */}
+        {/* Faits marquants */}
         <section className="card p-5">
-          <h2 className="mb-4 text-lg font-semibold">Détail du barème</h2>
-          <div className="space-y-2">
-            {player.score.details.map((d, i) => (
+          <h2 className="mb-4 text-lg font-semibold">
+            Faits marquants{" "}
+            <span className="text-sm font-normal text-white/40">
+              ({marquants.length})
+            </span>
+          </h2>
+          <div className="max-h-[420px] space-y-2 overflow-y-auto pr-1">
+            {marquants.length === 0 && (
+              <p className="text-sm text-white/50">
+                Aucun fait marquant hors production courante.
+              </p>
+            )}
+            {marquants.map((e, i) => (
               <div
                 key={i}
-                className="flex items-center justify-between border-b border-white/5 pb-2 text-sm"
+                className="flex items-center justify-between gap-3 border-b border-white/5 pb-2 text-sm"
               >
-                <span className="text-white/70">{d.label}</span>
-                <span
-                  className={
-                    d.points >= 0 ? "font-medium text-gold" : "text-red-400"
-                  }
-                >
-                  +{d.points}
-                </span>
+                <div className="flex min-w-0 items-center gap-2">
+                  <span
+                    className="inline-block h-2 w-2 shrink-0 rounded-full"
+                    style={{ background: CATEGORIES[e.categorie].color }}
+                  />
+                  <span className="truncate text-white/80">{e.libelle}</span>
+                </div>
+                <div className="flex shrink-0 items-center gap-3">
+                  <span className="text-xs text-white/40">{e.date}</span>
+                  <span className="w-10 text-right font-medium text-gold">
+                    +{e.points}
+                  </span>
+                </div>
               </div>
             ))}
-            <div className="flex items-center justify-between pt-2 text-sm">
-              <span className="text-white/50">Sous-total statistiques</span>
-              <span className="font-medium">{player.score.statPoints}</span>
-            </div>
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-white/50">Sous-total trophées</span>
-              <span className="font-medium">{player.score.trophyPoints}</span>
-            </div>
-            <div className="flex items-center justify-between border-t border-white/10 pt-3 text-base font-bold">
-              <span>Total</span>
-              <span className="gold-text">{player.score.total}</span>
-            </div>
           </div>
         </section>
       </div>
+    </div>
+  );
+}
 
-      {/* Trophées */}
-      {player.trophies.length > 0 && (
-        <section className="card p-5">
-          <h2 className="mb-3 text-lg font-semibold">Palmarès de la saison</h2>
-          <div className="flex flex-wrap gap-2">
-            {player.trophies.map((t, i) => (
-              <span
-                key={i}
-                className="rounded-full border border-gold/30 bg-gold/5 px-3 py-1 text-sm text-gold"
-              >
-                🏆 {t.name}
-              </span>
-            ))}
-          </div>
-        </section>
-      )}
+function StatTile({ value, label }: { value: number; label: string }) {
+  return (
+    <div className="card p-3 text-center">
+      <div className="text-2xl font-semibold text-white">{value}</div>
+      <div className="mt-1 text-[11px] uppercase tracking-wide text-white/40">
+        {label}
+      </div>
     </div>
   );
 }

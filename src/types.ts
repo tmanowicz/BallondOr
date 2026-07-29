@@ -1,57 +1,69 @@
-// Modèle de données du projet Ballon d'Or.
-// Remplace le JSON d'exemple (src/data/players.json) par tes vraies données
-// en respectant ces types, et tout le site s'adaptera automatiquement.
+// Modèle de données réel du projet Ballon d'Or.
+// Le site consomme directement le fichier `src/data/bareme_events.json`,
+// produit par le pipeline Python (voir dossier `pipeline/`).
 
-export type TrophyScope = "club" | "international" | "individual";
-
-export interface Trophy {
-  name: string;
-  scope: TrophyScope;
-}
-
-export interface PlayerSeasonStats {
-  appearances: number;
-  goals: number;
-  assists: number;
+/** Un joueur du vivier, tel qu'exporté par le barème. */
+export interface Joueur {
+  id: number;
+  nom: string;
+  club: string | null;
+  team_id: number | null;
   minutes: number;
-  /** Expected goals (buts attendus) */
-  xG: number;
-  /** Expected assists (passes décisives attendues) */
-  xA: number;
-  keyPasses: number;
-  shots: number;
-  dribblesCompleted: number;
-  passAccuracy: number; // pourcentage 0-100
-  tackles: number;
-  interceptions: number;
-  /** Note moyenne par match (échelle type 0-10) */
-  rating: number;
-  cleanSheets?: number;
-}
-
-export interface Player {
-  id: string;
-  name: string;
-  club: string;
-  nationality: string;
-  position: string;
-  age: number;
-  /** URL d'une photo (optionnel) */
-  photo?: string;
-  season: string;
-  stats: PlayerSeasonStats;
-  trophies: Trophy[];
-}
-
-/** Résultat du calcul du barème pour un joueur. */
-export interface ScoreBreakdown {
   total: number;
-  statPoints: number;
-  trophyPoints: number;
-  details: { label: string; points: number }[];
 }
 
-export interface RankedPlayer extends Player {
-  score: ScoreBreakdown;
+/**
+ * Un événement marquant : [date ISO, id joueur, points, libellé].
+ * C'est le format brut (tuple) du fichier de sortie.
+ */
+export type EvenementTuple = [string, number, number, string];
+
+/** Version nommée d'un événement, plus pratique à manipuler. */
+export interface Evenement {
+  date: string;
+  playerId: number;
+  points: number;
+  libelle: string;
+  categorie: CategorieId;
+}
+
+/** Fichier de sortie complet du pipeline. */
+export interface BaremeExport {
+  saison: string;
+  joueurs: Joueur[];
+  evenements: EvenementTuple[];
+}
+
+export type CategorieId =
+  | "but"
+  | "passe"
+  | "bonus_but"
+  | "bonus_passe"
+  | "motm"
+  | "parcours"
+  | "champion"
+  | "coupe"
+  | "defense"
+  | "clean_sheet"
+  | "titre_stat"
+  | "distinction";
+
+export interface Categorie {
+  id: CategorieId;
+  label: string;
+  color: string;
+}
+
+/** Répartition des points d'un joueur par catégorie. */
+export interface RepartitionCategorie {
+  categorie: Categorie;
+  points: number;
+  count: number;
+}
+
+/** Joueur enrichi : rang, événements, répartition. */
+export interface JoueurDetail extends Joueur {
   rank: number;
+  evenements: Evenement[];
+  repartition: RepartitionCategorie[];
 }

@@ -1,0 +1,1037 @@
+{
+  "commentaire": "Distinctions individuelles et faits marquants 2025/26, verifies par recherche. Le reste (production, parcours, buts decisifs, champions, titres de buteur/passeur des championnats) est calcule depuis la base et ne doit PAS figurer ici.",
+  "manquant": [
+    "Meilleur joueur de Serie A 2025/26 (15 pts)",
+    "MVP de la finale de Coupe du monde (20 pts)",
+    "Meilleurs buteur/passeur Europa League et titres de buteur LDC/CdM revalorises (20/30)",
+    "equipe-type Serie A : le TOTS EA existe (17 avril 2026) mais seuls 6 des 11 titulaires sont nommes dans les sources consultees — Modric, Yildiz, Nico Paz, Dimarco, Lautaro Martinez, McTominay. Non saisis pour ne pas biaiser."
+  ],
+  "note": "Hommes du match (tag motm=true) : seul le BONUS DE PHASE est porte ici, le point de base est supprime. Le script ne l'attribue QUE si le joueur n'a ni marque ni passe ce match, pour ne pas doublonner avec le bonus deja acquis par l'action.",
+  "evenements": [
+    {
+      "joueur": "Lamine Yamal",
+      "date": "2026-06-05",
+      "points": 15,
+      "libelle": "meilleur joueur de la Liga"
+    },
+    {
+      "joueur": "Khvicha Kvaratskhelia",
+      "date": "2026-05-31",
+      "points": 75,
+      "libelle": "MVP de la saison LDC"
+    },
+    {
+      "joueur": "Kylian Mbappé",
+      "date": "2026-05-30",
+      "points": 20,
+      "libelle": "meilleur buteur LDC (15 buts)"
+    },
+    {
+      "joueur": "Vinicius Junior",
+      "date": "2026-05-30",
+      "points": 16,
+      "libelle": "meilleur passeur LDC (7 passes)"
+    },
+    {
+      "joueur": "David Raya",
+      "date": "2026-05-31",
+      "points": 35,
+      "libelle": "equipe-type LDC"
+    },
+    {
+      "joueur": "Marcos Llorente",
+      "date": "2026-05-31",
+      "points": 35,
+      "libelle": "equipe-type LDC"
+    },
+    {
+      "joueur": "Marquinhos",
+      "date": "2026-05-31",
+      "points": 35,
+      "libelle": "equipe-type LDC"
+    },
+    {
+      "joueur": "Gabriel",
+      "date": "2026-05-31",
+      "points": 35,
+      "libelle": "equipe-type LDC"
+    },
+    {
+      "joueur": "Nuno Mendes",
+      "date": "2026-05-31",
+      "points": 35,
+      "libelle": "equipe-type LDC"
+    },
+    {
+      "joueur": "Michael Olise",
+      "date": "2026-05-31",
+      "points": 35,
+      "libelle": "equipe-type LDC"
+    },
+    {
+      "joueur": "Declan Rice",
+      "date": "2026-05-31",
+      "points": 35,
+      "libelle": "equipe-type LDC"
+    },
+    {
+      "joueur": "Vitinha",
+      "date": "2026-05-31",
+      "points": 35,
+      "libelle": "equipe-type LDC"
+    },
+    {
+      "joueur": "Khvicha Kvaratskhelia",
+      "date": "2026-05-31",
+      "points": 35,
+      "libelle": "equipe-type LDC"
+    },
+    {
+      "joueur": "Ousmane Dembélé",
+      "date": "2026-05-31",
+      "points": 35,
+      "libelle": "equipe-type LDC"
+    },
+    {
+      "joueur": "Harry Kane",
+      "date": "2026-05-31",
+      "points": 35,
+      "libelle": "equipe-type LDC"
+    },
+    {
+      "joueur": "Rodri",
+      "date": "2026-07-19",
+      "points": 100,
+      "libelle": "MVP de la Coupe du monde"
+    },
+    {
+      "joueur": "Kylian Mbappé",
+      "date": "2026-07-19",
+      "points": 30,
+      "libelle": "meilleur buteur CdM (10 buts)"
+    },
+    {
+      "joueur": "Michael Olise",
+      "date": "2026-07-19",
+      "points": 24,
+      "libelle": "meilleur passeur CdM (7 passes)"
+    },
+    {
+      "joueur": "Vozinha",
+      "date": "2026-07-22",
+      "points": 50,
+      "libelle": "equipe-type CdM"
+    },
+    {
+      "joueur": "Pedro Porro",
+      "date": "2026-07-22",
+      "points": 50,
+      "libelle": "equipe-type CdM"
+    },
+    {
+      "joueur": "Dayot Upamecano",
+      "date": "2026-07-22",
+      "points": 50,
+      "libelle": "equipe-type CdM"
+    },
+    {
+      "joueur": "Lisandro Martínez",
+      "date": "2026-07-22",
+      "points": 50,
+      "libelle": "equipe-type CdM"
+    },
+    {
+      "joueur": "Marc Cucurella",
+      "date": "2026-07-22",
+      "points": 50,
+      "libelle": "equipe-type CdM"
+    },
+    {
+      "joueur": "Rodri",
+      "date": "2026-07-22",
+      "points": 50,
+      "libelle": "equipe-type CdM"
+    },
+    {
+      "joueur": "Jude Bellingham",
+      "date": "2026-07-22",
+      "points": 50,
+      "libelle": "equipe-type CdM"
+    },
+    {
+      "joueur": "Michael Olise",
+      "date": "2026-07-22",
+      "points": 50,
+      "libelle": "equipe-type CdM"
+    },
+    {
+      "joueur": "Kylian Mbappé",
+      "date": "2026-07-22",
+      "points": 50,
+      "libelle": "equipe-type CdM"
+    },
+    {
+      "joueur": "Lionel Messi",
+      "date": "2026-07-22",
+      "points": 50,
+      "libelle": "equipe-type CdM"
+    },
+    {
+      "joueur": "Erling Haaland",
+      "date": "2026-07-22",
+      "points": 50,
+      "libelle": "equipe-type CdM"
+    },
+    {
+      "joueur": "Bruno Fernandes",
+      "date": "2026-05-23",
+      "points": 15,
+      "libelle": "meilleur joueur de Premier League"
+    },
+    {
+      "joueur": "Ousmane Dembélé",
+      "date": "2026-05-11",
+      "points": 15,
+      "libelle": "meilleur joueur de Ligue 1"
+    },
+    {
+      "joueur": "Mario Lemina",
+      "date": "2026-03-10",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Michael Olise",
+      "date": "2026-03-10",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Julián Álvarez",
+      "date": "2026-03-10",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Harvey Barnes",
+      "date": "2026-03-10",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Robert Andrich",
+      "date": "2026-03-11",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Sondre Brunstad",
+      "date": "2026-03-11",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Khvicha Kvaratskhelia",
+      "date": "2026-03-11",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Federico Valverde",
+      "date": "2026-03-11",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Francisco Trincão",
+      "date": "2026-03-17",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Declan Rice",
+      "date": "2026-03-17",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Khvicha Kvaratskhelia",
+      "date": "2026-03-17",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Vinícius Júnior",
+      "date": "2026-03-17",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Raphinha",
+      "date": "2026-03-18",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Harry Kane",
+      "date": "2026-03-18",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Dominik Szoboszlai",
+      "date": "2026-03-18",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Xavi Simons",
+      "date": "2026-03-18",
+      "points": 4,
+      "libelle": "homme du match LDC huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "David Raya",
+      "date": "2026-04-07",
+      "points": 8,
+      "libelle": "homme du match LDC quarts",
+      "motm": true
+    },
+    {
+      "joueur": "Manuel Neuer",
+      "date": "2026-04-07",
+      "points": 8,
+      "libelle": "homme du match LDC quarts",
+      "motm": true
+    },
+    {
+      "joueur": "Julián Álvarez",
+      "date": "2026-04-08",
+      "points": 8,
+      "libelle": "homme du match LDC quarts",
+      "motm": true
+    },
+    {
+      "joueur": "Khvicha Kvaratskhelia",
+      "date": "2026-04-08",
+      "points": 8,
+      "libelle": "homme du match LDC quarts",
+      "motm": true
+    },
+    {
+      "joueur": "Dani Olmo",
+      "date": "2026-04-14",
+      "points": 8,
+      "libelle": "homme du match LDC quarts",
+      "motm": true
+    },
+    {
+      "joueur": "Ousmane Dembélé",
+      "date": "2026-04-14",
+      "points": 8,
+      "libelle": "homme du match LDC quarts",
+      "motm": true
+    },
+    {
+      "joueur": "Martin Zubimendi",
+      "date": "2026-04-15",
+      "points": 8,
+      "libelle": "homme du match LDC quarts",
+      "motm": true
+    },
+    {
+      "joueur": "Michael Olise",
+      "date": "2026-04-15",
+      "points": 8,
+      "libelle": "homme du match LDC quarts",
+      "motm": true
+    },
+    {
+      "joueur": "Ousmane Dembélé",
+      "date": "2026-04-28",
+      "points": 15,
+      "libelle": "homme du match LDC demi-finales",
+      "motm": true
+    },
+    {
+      "joueur": "Antoine Griezmann",
+      "date": "2026-04-29",
+      "points": 15,
+      "libelle": "homme du match LDC demi-finales",
+      "motm": true
+    },
+    {
+      "joueur": "Declan Rice",
+      "date": "2026-05-05",
+      "points": 15,
+      "libelle": "homme du match LDC demi-finales",
+      "motm": true
+    },
+    {
+      "joueur": "Willian Pacho",
+      "date": "2026-05-06",
+      "points": 15,
+      "libelle": "homme du match LDC demi-finales",
+      "motm": true
+    },
+    {
+      "joueur": "Vitinha",
+      "date": "2026-05-30",
+      "points": 30,
+      "libelle": "homme du match LDC finale",
+      "motm": true
+    },
+    {
+      "joueur": "Gabriel Sara",
+      "date": "2026-02-17",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Serhou Guirassy",
+      "date": "2026-02-17",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Aurélien Tchouaméni",
+      "date": "2026-02-17",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Désiré Doué",
+      "date": "2026-02-17",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Anthony Gordon",
+      "date": "2026-02-18",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Hans Vanaken",
+      "date": "2026-02-18",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Kasper Høgh",
+      "date": "2026-02-18",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Patrik Schick",
+      "date": "2026-02-18",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Alexander Sørloth",
+      "date": "2026-02-24",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Alejandro Grimaldo",
+      "date": "2026-02-24",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Jens Petter Hauge",
+      "date": "2026-02-24",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Sandro Tonali",
+      "date": "2026-02-24",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Davide Zappacosta",
+      "date": "2026-02-25",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Victor Osimhen",
+      "date": "2026-02-25",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Désiré Doué",
+      "date": "2026-02-25",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Aurélien Tchouaméni",
+      "date": "2026-02-25",
+      "points": 2,
+      "libelle": "homme du match LDC seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Stephen Eustaquio",
+      "date": "2026-06-28",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Orlando Gill",
+      "date": "2026-06-29",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Issa Diop",
+      "date": "2026-06-29",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Casemiro",
+      "date": "2026-06-29",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Kylian Mbappé",
+      "date": "2026-06-30",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Antonio Nusa",
+      "date": "2026-06-30",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Julián Quiñones",
+      "date": "2026-06-30",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Harry Kane",
+      "date": "2026-07-01",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Malik Tillman",
+      "date": "2026-07-01",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Youri Tielemans",
+      "date": "2026-07-01",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Cristiano Ronaldo",
+      "date": "2026-07-02",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Lamine Yamal",
+      "date": "2026-07-02",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Breel Embolo",
+      "date": "2026-07-02",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Lionel Messi",
+      "date": "2026-07-03",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Luis Díaz",
+      "date": "2026-07-03",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Mohamed Salah",
+      "date": "2026-07-03",
+      "points": 3,
+      "libelle": "homme du match CdM seiziemes",
+      "motm": true
+    },
+    {
+      "joueur": "Orlando Gill",
+      "date": "2026-07-04",
+      "points": 5,
+      "libelle": "homme du match CdM huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Azzedine Ounahi",
+      "date": "2026-07-04",
+      "points": 5,
+      "libelle": "homme du match CdM huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Erling Haaland",
+      "date": "2026-07-05",
+      "points": 5,
+      "libelle": "homme du match CdM huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Jude Bellingham",
+      "date": "2026-07-05",
+      "points": 5,
+      "libelle": "homme du match CdM huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Rodri",
+      "date": "2026-07-06",
+      "points": 5,
+      "libelle": "homme du match CdM huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Charles De Ketelaere",
+      "date": "2026-07-06",
+      "points": 5,
+      "libelle": "homme du match CdM huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Lionel Messi",
+      "date": "2026-07-07",
+      "points": 5,
+      "libelle": "homme du match CdM huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Gregor Kobel",
+      "date": "2026-07-07",
+      "points": 5,
+      "libelle": "homme du match CdM huitiemes",
+      "motm": true
+    },
+    {
+      "joueur": "Kylian Mbappé",
+      "date": "2026-07-09",
+      "points": 10,
+      "libelle": "homme du match CdM quarts",
+      "motm": true
+    },
+    {
+      "joueur": "Lamine Yamal",
+      "date": "2026-07-10",
+      "points": 10,
+      "libelle": "homme du match CdM quarts",
+      "motm": true
+    },
+    {
+      "joueur": "Jude Bellingham",
+      "date": "2026-07-11",
+      "points": 10,
+      "libelle": "homme du match CdM quarts",
+      "motm": true
+    },
+    {
+      "joueur": "Julián Álvarez",
+      "date": "2026-07-11",
+      "points": 10,
+      "libelle": "homme du match CdM quarts",
+      "motm": true
+    },
+    {
+      "joueur": "Pedro Porro",
+      "date": "2026-07-14",
+      "points": 20,
+      "libelle": "homme du match CdM demi-finales",
+      "motm": true
+    },
+    {
+      "joueur": "Lionel Messi",
+      "date": "2026-07-15",
+      "points": 20,
+      "libelle": "homme du match CdM demi-finales",
+      "motm": true
+    },
+    {
+      "joueur": "Ferran Torres",
+      "date": "2026-07-19",
+      "points": 40,
+      "libelle": "homme du match CdM finale",
+      "motm": true
+    },
+    {
+      "joueur": "Morgan Rogers",
+      "date": "2026-05-22",
+      "points": 15,
+      "libelle": "MVP de l'Europa League"
+    },
+    {
+      "joueur": "Emiliano Martínez",
+      "date": "2026-05-22",
+      "points": 10,
+      "libelle": "equipe-type Europa League"
+    },
+    {
+      "joueur": "John McGinn",
+      "date": "2026-05-22",
+      "points": 10,
+      "libelle": "equipe-type Europa League"
+    },
+    {
+      "joueur": "Morgan Rogers",
+      "date": "2026-05-22",
+      "points": 10,
+      "libelle": "equipe-type Europa League"
+    },
+    {
+      "joueur": "Emiliano Buendía",
+      "date": "2026-05-22",
+      "points": 10,
+      "libelle": "equipe-type Europa League"
+    },
+    {
+      "joueur": "Bukayo Saka",
+      "date": "2026-07-18",
+      "points": 10,
+      "libelle": "homme du match CdM match 3e place",
+      "motm": true
+    },
+    {
+      "joueur": "Robin Risser",
+      "date": "2026-05-11",
+      "points": 10,
+      "libelle": "equipe-type Ligue 1"
+    },
+    {
+      "joueur": "Achraf Hakimi",
+      "date": "2026-05-11",
+      "points": 10,
+      "libelle": "equipe-type Ligue 1"
+    },
+    {
+      "joueur": "Malang Sarr",
+      "date": "2026-05-11",
+      "points": 10,
+      "libelle": "equipe-type Ligue 1"
+    },
+    {
+      "joueur": "Willian Pacho",
+      "date": "2026-05-11",
+      "points": 10,
+      "libelle": "equipe-type Ligue 1"
+    },
+    {
+      "joueur": "Nuno Mendes",
+      "date": "2026-05-11",
+      "points": 10,
+      "libelle": "equipe-type Ligue 1"
+    },
+    {
+      "joueur": "Corentin Tolisso",
+      "date": "2026-05-11",
+      "points": 10,
+      "libelle": "equipe-type Ligue 1"
+    },
+    {
+      "joueur": "Vitinha",
+      "date": "2026-05-11",
+      "points": 10,
+      "libelle": "equipe-type Ligue 1"
+    },
+    {
+      "joueur": "Ibrahim Sangaré",
+      "date": "2026-05-11",
+      "points": 10,
+      "libelle": "equipe-type Ligue 1"
+    },
+    {
+      "joueur": "Florian Thauvin",
+      "date": "2026-05-11",
+      "points": 10,
+      "libelle": "equipe-type Ligue 1"
+    },
+    {
+      "joueur": "Ousmane Dembélé",
+      "date": "2026-05-11",
+      "points": 10,
+      "libelle": "equipe-type Ligue 1"
+    },
+    {
+      "joueur": "Mason Greenwood",
+      "date": "2026-05-11",
+      "points": 10,
+      "libelle": "equipe-type Ligue 1"
+    },
+    {
+      "joueur": "Gregor Kobel",
+      "date": "2026-04-30",
+      "points": 10,
+      "libelle": "equipe-type Bundesliga"
+    },
+    {
+      "joueur": "Nico Schlotterbeck",
+      "date": "2026-04-30",
+      "points": 10,
+      "libelle": "equipe-type Bundesliga"
+    },
+    {
+      "joueur": "Jonathan Tah",
+      "date": "2026-04-30",
+      "points": 10,
+      "libelle": "equipe-type Bundesliga"
+    },
+    {
+      "joueur": "Dayot Upamecano",
+      "date": "2026-04-30",
+      "points": 10,
+      "libelle": "equipe-type Bundesliga"
+    },
+    {
+      "joueur": "Luka Vušković",
+      "date": "2026-04-30",
+      "points": 10,
+      "libelle": "equipe-type Bundesliga"
+    },
+    {
+      "joueur": "Joshua Kimmich",
+      "date": "2026-04-30",
+      "points": 10,
+      "libelle": "equipe-type Bundesliga"
+    },
+    {
+      "joueur": "Aleksandar Pavlović",
+      "date": "2026-04-30",
+      "points": 10,
+      "libelle": "equipe-type Bundesliga"
+    },
+    {
+      "joueur": "Angelo Stiller",
+      "date": "2026-04-30",
+      "points": 10,
+      "libelle": "equipe-type Bundesliga"
+    },
+    {
+      "joueur": "Luis Díaz",
+      "date": "2026-04-30",
+      "points": 10,
+      "libelle": "equipe-type Bundesliga"
+    },
+    {
+      "joueur": "Harry Kane",
+      "date": "2026-04-30",
+      "points": 10,
+      "libelle": "equipe-type Bundesliga"
+    },
+    {
+      "joueur": "Michael Olise",
+      "date": "2026-04-30",
+      "points": 10,
+      "libelle": "equipe-type Bundesliga"
+    },
+    {
+      "joueur": "David Raya",
+      "date": "2026-05-30",
+      "points": 10,
+      "libelle": "equipe-type Premier League"
+    },
+    {
+      "joueur": "Jurrien Timber",
+      "date": "2026-05-30",
+      "points": 10,
+      "libelle": "equipe-type Premier League"
+    },
+    {
+      "joueur": "William Saliba",
+      "date": "2026-05-30",
+      "points": 10,
+      "libelle": "equipe-type Premier League"
+    },
+    {
+      "joueur": "Gabriel Magalhaes",
+      "date": "2026-05-30",
+      "points": 10,
+      "libelle": "equipe-type Premier League"
+    },
+    {
+      "joueur": "Nico O'Reilly",
+      "date": "2026-05-30",
+      "points": 10,
+      "libelle": "equipe-type Premier League"
+    },
+    {
+      "joueur": "Dominik Szoboszlai",
+      "date": "2026-05-30",
+      "points": 10,
+      "libelle": "equipe-type Premier League"
+    },
+    {
+      "joueur": "Bruno Fernandes",
+      "date": "2026-05-30",
+      "points": 10,
+      "libelle": "equipe-type Premier League"
+    },
+    {
+      "joueur": "Antoine Semenyo",
+      "date": "2026-05-30",
+      "points": 10,
+      "libelle": "equipe-type Premier League"
+    },
+    {
+      "joueur": "Erling Haaland",
+      "date": "2026-05-30",
+      "points": 10,
+      "libelle": "equipe-type Premier League"
+    },
+    {
+      "joueur": "Igor Thiago",
+      "date": "2026-05-30",
+      "points": 10,
+      "libelle": "equipe-type Premier League"
+    },
+    {
+      "joueur": "Declan Rice",
+      "date": "2026-05-30",
+      "points": 10,
+      "libelle": "equipe-type Premier League"
+    },
+    {
+      "joueur": "Joan García",
+      "date": "2026-05-15",
+      "points": 10,
+      "libelle": "equipe-type LaLiga"
+    },
+    {
+      "joueur": "Santiago Mouriño",
+      "date": "2026-05-15",
+      "points": 10,
+      "libelle": "equipe-type LaLiga"
+    },
+    {
+      "joueur": "Marcos Llorente",
+      "date": "2026-05-15",
+      "points": 10,
+      "libelle": "equipe-type LaLiga"
+    },
+    {
+      "joueur": "Eric García",
+      "date": "2026-05-15",
+      "points": 10,
+      "libelle": "equipe-type LaLiga"
+    },
+    {
+      "joueur": "Carlos Romero",
+      "date": "2026-05-15",
+      "points": 10,
+      "libelle": "equipe-type LaLiga"
+    },
+    {
+      "joueur": "Pedri",
+      "date": "2026-05-15",
+      "points": 10,
+      "libelle": "equipe-type LaLiga"
+    },
+    {
+      "joueur": "Aurélien Tchouaméni",
+      "date": "2026-05-15",
+      "points": 10,
+      "libelle": "equipe-type LaLiga"
+    },
+    {
+      "joueur": "Federico Valverde",
+      "date": "2026-05-15",
+      "points": 10,
+      "libelle": "equipe-type LaLiga"
+    },
+    {
+      "joueur": "Lamine Yamal",
+      "date": "2026-05-15",
+      "points": 10,
+      "libelle": "equipe-type LaLiga"
+    },
+    {
+      "joueur": "Vedat Muriqi",
+      "date": "2026-05-15",
+      "points": 10,
+      "libelle": "equipe-type LaLiga"
+    },
+    {
+      "joueur": "Kylian Mbappé",
+      "date": "2026-05-15",
+      "points": 10,
+      "libelle": "equipe-type LaLiga"
+    },
+    {
+      "joueur": "Michael Olise",
+      "date": "2026-05-16",
+      "points": 15,
+      "libelle": "meilleur joueur de Bundesliga"
+    }
+  ]
+}

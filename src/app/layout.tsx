@@ -27,12 +27,13 @@ export default function RootLayout({
             <div className="flex items-center gap-1 text-sm">
               <NavLink href="/">Classement</NavLink>
               <NavLink href="/compare">Comparateur</NavLink>
+              <NavLink href="/bareme">Barème</NavLink>
             </div>
           </nav>
         </header>
         <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
         <footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-white/40">
-          Projet Ballon d&apos;Or · données d&apos;exemple · barème modifiable
+          Projet Ballon d&apos;Or · saison 2025/2026 · calcul FotMob + barème 2026
         </footer>
       </body>
     </html>
